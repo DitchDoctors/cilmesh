@@ -4,8 +4,11 @@
 
   const ctx = canvas.getContext('2d');
 
+  const REFERENCE_WIDTH = 1920;
+  const REFERENCE_HEIGHT = 1080;
+  const REFERENCE_NODES = 120;
+
   const settings = {
-    nodeCount: 120,
     linkDist: 220,
     nodeSpeed: 0.3,
     nodeRadius: 2.5,
@@ -26,6 +29,13 @@
   let hitInCurrentWave = new Set();
   let lastAutoPulse = 0;
 
+  function getNodeCount() {
+    const area = width * height;
+    const refArea = REFERENCE_WIDTH * REFERENCE_HEIGHT;
+    const count = Math.round(REFERENCE_NODES * (area / refArea));
+    return Math.max(15, Math.min(REFERENCE_NODES, count));
+  }
+
   function resizeCanvas() {
     const dpr = window.devicePixelRatio || 1;
     width = canvas.offsetWidth;
@@ -37,8 +47,9 @@
   }
 
   function makeNodes() {
+    const nodeCount = getNodeCount();
     nodes = [];
-    for (let i = 0; i < settings.nodeCount; i++) {
+    for (let i = 0; i < nodeCount; i++) {
       const speedX = (Math.random() - 0.5) * settings.nodeSpeed * 2;
       const speedY = (Math.random() - 0.5) * settings.nodeSpeed * 2;
       nodes.push({
@@ -49,7 +60,7 @@
         color: settings.colors[i % settings.colors.length]
       });
     }
-    brightness = new Array(settings.nodeCount).fill(0);
+    brightness = new Array(nodeCount).fill(0);
   }
 
   function rebuildLinks() {
@@ -209,10 +220,7 @@
 
   window.addEventListener('resize', function() {
     resizeCanvas();
-    for (let i = 0; i < nodes.length; i++) {
-      nodes[i].x = Math.min(nodes[i].x, width);
-      nodes[i].y = Math.min(nodes[i].y, height);
-    }
+    makeNodes();
     rebuildLinks();
   });
 
