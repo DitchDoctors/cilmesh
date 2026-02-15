@@ -1,5 +1,3 @@
-/* CILMesh - Central Illinois Meshtastic Network */
-
 :root {
   --bg-deep: #0a0e14;
   --bg-card: rgba(10, 14, 20, 0.85);
@@ -35,7 +33,7 @@ body {
   position: relative;
 }
 
-/* Particles canvas - full viewport mesh background */
+
 #particles-js {
   position: fixed;
   top: 0;
@@ -128,7 +126,6 @@ body {
   flex-shrink: 0;
 }
 
-/* Matrix button - green */
 .btn-matrix {
   background: var(--matrix-green);
   color: #0a0e14;
@@ -139,7 +136,7 @@ body {
   box-shadow: 0 6px 24px rgba(0, 210, 106, 0.35);
 }
 
-/* Discord button - blurple */
+
 .btn-discord {
   background: var(--discord-blurple);
   color: #fff;
@@ -150,7 +147,7 @@ body {
   box-shadow: 0 6px 24px rgba(88, 101, 242, 0.4);
 }
 
-/* MQTT dropdown */
+
 .mqtt-dropdown {
   position: relative;
   flex-basis: 100%;
